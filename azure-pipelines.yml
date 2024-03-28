@@ -13,6 +13,11 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: '/home/vsts/work/_temp/e8de731e-719e-4e0c-824f-5e721c730c27.sh'
+
 - script: dotnet restore
   displayName: 'dotnet restore'
 
