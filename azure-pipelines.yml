@@ -12,16 +12,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-steps:
-- task: DotNetCoreCLI@2
-  displayName: Publish
-  inputs:
-    command: publish
-    publishWebProjects: false
-    projects: src/PROJECTNAME.Web.Mvc/PROJECTNAME.Web.Mvc.csproj
-    arguments: ' --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
-    
+steps:    
 - script: dotnet restore
   displayName: 'dotnet restore'
 

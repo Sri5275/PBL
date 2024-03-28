@@ -9,3 +9,15 @@ D:\PBL\Common\obj\Debug\net8.0\Common.dll
 D:\PBL\Common\obj\Debug\net8.0\refint\Common.dll
 D:\PBL\Common\obj\Debug\net8.0\Common.pdb
 D:\PBL\Common\obj\Debug\net8.0\ref\Common.dll
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\bin\Debug\net8.0\Common.deps.json
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\bin\Debug\net8.0\Common.dll
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\bin\Debug\net8.0\Common.pdb
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\obj\Debug\net8.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\obj\Debug\net8.0\Common.AssemblyInfoInputs.cache
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\obj\Debug\net8.0\Common.AssemblyInfo.cs
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\obj\Debug\net8.0\Common.csproj.CoreCompileInputs.cache
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\obj\Debug\net8.0\Common.sourcelink.json
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\obj\Debug\net8.0\Common.dll
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\obj\Debug\net8.0\refint\Common.dll
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\obj\Debug\net8.0\Common.pdb
+C:\Users\SRI\Desktop\VStudioC#\PBL\Common\obj\Debug\net8.0\ref\Common.dll

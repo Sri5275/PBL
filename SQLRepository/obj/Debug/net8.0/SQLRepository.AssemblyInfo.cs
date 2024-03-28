@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SQLRepository")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bedaa7ebe7cebcb861dde320197a0286679d19ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("SQLRepository")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SQLRepository")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

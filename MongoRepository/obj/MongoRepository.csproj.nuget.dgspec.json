@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PBL\\MongoRepository\\MongoRepository.csproj": {}
+    "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\MongoRepository\\MongoRepository.csproj": {}
   },
   "projects": {
-    "D:\\PBL\\Common\\Common.csproj": {
+    "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PBL\\Common\\Common.csproj",
+        "projectUniqueName": "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "D:\\PBL\\Common\\Common.csproj",
-        "packagesPath": "C:\\Users\\Vinni\\.nuget\\packages\\",
-        "outputPath": "D:\\PBL\\Common\\obj\\",
+        "projectPath": "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\SRI\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\Common\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Vinni\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\SRI\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -65,25 +55,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\PBL\\MongoRepository\\MongoRepository.csproj": {
+    "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\MongoRepository\\MongoRepository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PBL\\MongoRepository\\MongoRepository.csproj",
+        "projectUniqueName": "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\MongoRepository\\MongoRepository.csproj",
         "projectName": "MongoRepository",
-        "projectPath": "D:\\PBL\\MongoRepository\\MongoRepository.csproj",
-        "packagesPath": "C:\\Users\\Vinni\\.nuget\\packages\\",
-        "outputPath": "D:\\PBL\\MongoRepository\\obj\\",
+        "projectPath": "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\MongoRepository\\MongoRepository.csproj",
+        "packagesPath": "C:\\Users\\SRI\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\MongoRepository\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Vinni\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\SRI\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -91,15 +77,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\PBL\\SQLRepository\\SQLRepository.csproj": {
-                "projectPath": "D:\\PBL\\SQLRepository\\SQLRepository.csproj"
+              "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\SQLRepository\\SQLRepository.csproj": {
+                "projectPath": "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\SQLRepository\\SQLRepository.csproj"
               }
             }
           }
@@ -108,11 +93,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -134,25 +114,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\PBL\\SQLRepository\\SQLRepository.csproj": {
+    "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\SQLRepository\\SQLRepository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PBL\\SQLRepository\\SQLRepository.csproj",
+        "projectUniqueName": "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\SQLRepository\\SQLRepository.csproj",
         "projectName": "SQLRepository",
-        "projectPath": "D:\\PBL\\SQLRepository\\SQLRepository.csproj",
-        "packagesPath": "C:\\Users\\Vinni\\.nuget\\packages\\",
-        "outputPath": "D:\\PBL\\SQLRepository\\obj\\",
+        "projectPath": "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\SQLRepository\\SQLRepository.csproj",
+        "packagesPath": "C:\\Users\\SRI\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\SQLRepository\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Vinni\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\SRI\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -160,15 +136,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\PBL\\Common\\Common.csproj": {
-                "projectPath": "D:\\PBL\\Common\\Common.csproj"
+              "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\SRI\\Desktop\\VStudioC#\\PBL\\Common\\Common.csproj"
               }
             }
           }
@@ -177,21 +152,12 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.Azure.Cosmos": {
-              "target": "Package",
-              "version": "[3.38.1, )"
-            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[5.1.5, )"
@@ -213,7 +179,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

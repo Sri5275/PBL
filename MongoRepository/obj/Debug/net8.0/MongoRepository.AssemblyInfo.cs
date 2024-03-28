@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MongoRepository")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bedaa7ebe7cebcb861dde320197a0286679d19ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("MongoRepository")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MongoRepository")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
