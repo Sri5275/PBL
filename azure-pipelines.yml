@@ -13,10 +13,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: '/home/vsts/work/_temp/e8de731e-719e-4e0c-824f-5e721c730c27.sh'
 
 - script: dotnet restore
   displayName: 'dotnet restore'
@@ -24,10 +20,6 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
   
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects:  '**/*.csproj'
 
 - script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
   displayName: 'dotnet publish $(buildConfiguration)'
