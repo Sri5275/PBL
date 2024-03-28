@@ -7,24 +7,29 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-steps:    
+steps:
 - task: DotNetCoreCLI@2
+  displayName: 'Restore'
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Build'
   inputs:
     command: 'build'
     projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Publish'
   inputs:
     command: 'publish'
     projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)/PBL'
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'published_files'
