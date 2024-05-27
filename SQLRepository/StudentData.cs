@@ -22,7 +22,7 @@ namespace SQLRepository
         {
             List<StudentClass> student = new List<StudentClass>();
             _connection.Open();
-            string query = "select RollNumber, StudentName, Department from StudentTable;";
+            string query = "select id, username, email from students;";
             SqlCommand command = new SqlCommand(query, (SqlConnection)_connection);
 
             using (SqlDataReader reader = await command.ExecuteReaderAsync())
@@ -31,9 +31,9 @@ namespace SQLRepository
                 {
                     StudentClass studentClass = new StudentClass()
                     {
-                        RollNumber = Convert.ToInt32(reader["RollNumber"]),
-                        StudentName = Convert.ToString(reader["StudentName"]),
-                        Department = Convert.ToString(reader["Department"])
+                        id = Convert.ToInt32(reader["id"]),
+                        username = Convert.ToString(reader["username"]),
+                        email = Convert.ToString(reader["email"])
                     };
                     student.Add(studentClass);
                 }
@@ -41,12 +41,12 @@ namespace SQLRepository
             return student;
         }
 
-        public async Task<StudentClass> GetByStudentRollNoAsync(int rollNumber)
+        public async Task<StudentClass> GetByStudentIdAsync(int id)
         {
             _connection.Open();
-            string query = "SELECT RollNumber, StudentName, Department FROM StudentTable WHERE RollNumber = @RollNumber;";
+            string query = "select id, username, email from students where id=@id;";
             SqlCommand command = new SqlCommand(query, (SqlConnection)_connection);
-            command.Parameters.AddWithValue("@RollNumber", rollNumber);
+            command.Parameters.AddWithValue("@id", id);
 
             using (SqlDataReader reader = await command.ExecuteReaderAsync())
             {
@@ -54,9 +54,9 @@ namespace SQLRepository
                 {
                     return new StudentClass()
                     {
-                        RollNumber = Convert.ToInt32(reader["RollNumber"]),
-                        StudentName = Convert.ToString(reader["StudentName"]),
-                        Department = Convert.ToString(reader["Department"])
+                        id = Convert.ToInt32(reader["id"]),
+                        username = Convert.ToString(reader["username"]),
+                        email = Convert.ToString(reader["email"])
                     };
                 }
             }
@@ -66,11 +66,11 @@ namespace SQLRepository
         public async Task<bool> UpdateStudentAsync(StudentClass student)
         {
             _connection.Open();
-            string query = "UPDATE StudentTable SET StudentName = @StudentName, Department = @Department WHERE RollNumber = @RollNumber;";
+            string query = "UPDATE students SET username = @username, email = @emial WHERE id = @id;";
             SqlCommand command = new SqlCommand(query, (SqlConnection)_connection);
-            command.Parameters.AddWithValue("@RollNumber", student.RollNumber);
-            command.Parameters.AddWithValue("@StudentName", student.StudentName);
-            command.Parameters.AddWithValue("@Department", student.Department);
+            command.Parameters.AddWithValue("@id", student.id);
+            command.Parameters.AddWithValue("@username", student.username);
+            command.Parameters.AddWithValue("@email", student.email);
 
             int rowsAffected = await command.ExecuteNonQueryAsync();
 
@@ -82,11 +82,11 @@ namespace SQLRepository
             try
             {
                 _connection.Open();
-                string query = "INSERT INTO StudentTable (RollNumber, StudentName, Department) VALUES (@RollNumber, @StudentName, @Department);";
+                string query = "INSERT INTO students (id, username, email) VALUES (@id, @username, @email);";
                 SqlCommand command = new SqlCommand(query, (SqlConnection)_connection);
-                object rollNumberParam = student.RollNumber != null ? (object)student.RollNumber : DBNull.Value;
-                object studentNameParam = !string.IsNullOrEmpty(student.StudentName) ? (object)student.StudentName : DBNull.Value;
-                object departmentParam = !string.IsNullOrEmpty(student.Department) ? (object)student.Department : DBNull.Value;
+                object idParam = student.id != null ? (object)student.id : DBNull.Value;
+                object usernameParam = !string.IsNullOrEmpty(student.username) ? (object)student.username : DBNull.Value;
+                object emailParam = !string.IsNullOrEmpty(student.email) ? (object)student.email : DBNull.Value;
                 command.Parameters.AddWithValue("@RollNumber", rollNumberParam);
                 command.Parameters.AddWithValue("@StudentName", studentNameParam);
                 command.Parameters.AddWithValue("@Department", departmentParam);
@@ -105,12 +105,12 @@ namespace SQLRepository
             //return result != null ? Convert.ToInt32(result) : 0;
         }
 
-        public async Task<bool> DeleteStudentAsync(int rollNumber)
+        public async Task<bool> DeleteStudentAsync(int id)
         {
             _connection.Open();
-            string query = "DELETE FROM StudentTable WHERE RollNumber = @RollNumber;";
+            string query = "DELETE FROM students WHERE id = @id;";
             SqlCommand command = new SqlCommand(query, (SqlConnection)_connection);
-            command.Parameters.AddWithValue("@RollNumber", rollNumber);
+            command.Parameters.AddWithValue("@RollNumber", id);
 
             int rowsAffected = await command.ExecuteNonQueryAsync();
 
@@ -122,7 +122,7 @@ namespace SQLRepository
         {
             List<StudentClass2> student2 = new List<StudentClass2>();
             _connection.Open();
-            string query = "select StudentID, StudentName, DOB, Gender from Student;";
+            string query = "select id, username, email from students;";
             SqlCommand command = new SqlCommand(query, (SqlConnection)_connection);
 
             using (SqlDataReader reader = await command.ExecuteReaderAsync())
@@ -131,10 +131,11 @@ namespace SQLRepository
                 {
                     StudentClass2 studentClass2 = new StudentClass2()
                     {
-                        StudentID = Convert.ToInt32(reader["StudentID"]),
-                        StudentName = Convert.ToString(reader["StudentName"]),
-                        DOB = Convert.ToDateTime(reader["DOB"]),
-                        Gender = Convert.ToChar(reader["Gender"])
+                        id = Convert.ToInt32(reader["id"]),
+                        username = Convert.ToString(reader["username"]),
+                        email = Convert.ToString(reader["email"]),
+
+
                     };
                     student2.Add(studentClass2);
                 }

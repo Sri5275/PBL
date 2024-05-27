@@ -10,10 +10,10 @@ namespace SQLRepository
     public interface IStudentData
     {
         Task<List<StudentClass>> GetAllStudentsAsync();
-        Task<StudentClass> GetByStudentRollNoAsync(int rollNumber);
+        Task<StudentClass> GetByStudentIdAsync(int id);
         Task<bool> UpdateStudentAsync(StudentClass student);
         Task<int> InsertStudentAsync(StudentClass student);
-        Task<bool> DeleteStudentAsync(int rollNumber);
+        Task<bool> DeleteStudentAsync(int id);
         Task<List<StudentClass2>> GetAllStudentDataAsync();
     }
 }

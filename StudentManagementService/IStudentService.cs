@@ -10,10 +10,10 @@ namespace StudentManagementService
     public interface IStudentService
     {
         public Task<List<StudentClass>> GetAllStudents();
-        public Task<StudentClass> GetByStudentRollNo(int rollNo);
+        public Task<StudentClass> GetByStudentId(int id);
         public Task<int> InsertStudent(StudentClass student);
         public Task<bool> UpdateStudent(StudentClass student);
-        public Task<bool> DeleteStudent(int rollNo);
+        public Task<bool> DeleteStudent(int id);
 
         public Task<List<StudentClass2>> GetAllStudentData();
 
