@@ -27,7 +27,41 @@ steps:
     command: 'publish'
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+- task: PowerShell@2
+  displayName: 'SendEmails'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $smtpServer = "$(SMTP_SERVER)"
+      $smtpPort = 587  # Common SMTP port for TLS
+      $smtpUser = "$(SMTP_USER)"
+      $smtpPassword = "$(SMTP_PASSWORD)"
+      $fromEmail = "21071a05r8@vnrvjiet.in"
+      $toEmail = "saketh1844@gmail.com"
+      $subject = "Code Analysis Report URL"
+      $body = "Please find the latest code analysis report here: https://crosspapers.com"
+      
+      $message = New-Object system.net.mail.mailmessage
+      $message.from = $fromEmail
+      $message.To.Add($toEmail)
+      $message.Subject = $subject
+      $message.Body = $body
 
+      $smtp = New-Object Net.Mail.SmtpClient($smtpServer, $smtpPort)
+      $smtp.EnableSsl = $true
+      $smtp.Credentials = New-Object System.Net.NetworkCredential($smtpUser, $smtpPassword)
+
+      try {
+          $smtp.Send($message)
+          Write-Host "Email sent successfully."
+      }
+      catch {
+          Write-Host "Failed to send email. Error: $_"
+      }
+  env:
+    SMTP_USER: $(21071a05r8@vnrvjiet.in)
+    SMTP_PASSWORD: $(vnrvjiet)
+    SMTP_SERVER: $(smtp.office365.com)
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
