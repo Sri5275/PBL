@@ -6,6 +6,9 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  SMTP_SERVER: 'smtp.office365.com'
+  SMTP_USER: '21071a05r8@vnrvjiet.in'
+  SMTP_PASSWORD: 'vnrvjiet' # Ensure this is securely managed
 
 steps:
 - task: DotNetCoreCLI@2
@@ -15,18 +18,17 @@ steps:
     projects: '**/*.csproj'
 
 - task: PowerShell@2
-  displayName: 'SendEmails'
   inputs:
     targetType: 'inline'
     script: |
-      $smtpServer = "$(SMTP_SERVER)"
+      $smtpServer = "${env:SMTP_SERVER}"
       $smtpPort = 587  # Common SMTP port for TLS
-      $smtpUser = "$(SMTP_USER)"
-      $smtpPassword = "$(SMTP_PASSWORD)"
-      $fromEmail = "21071a05r8@vnrvjiet.in"
-      $toEmail = "saketh1844@gmail.com"
+      $smtpUser = "${env:SMTP_USER}"
+      $smtpPassword = "${env:SMTP_PASSWORD}"
+      $fromEmail = "your-email@yourdomain.com"
+      $toEmail = "recipient@example.com"
       $subject = "Code Analysis Report URL"
-      $body = "Please find the latest code analysis report here: https://crosspapers.com"
+      $body = "Please find the latest code analysis report here: https://example.com/code-analysis-report"
       
       $message = New-Object system.net.mail.mailmessage
       $message.from = $fromEmail
@@ -46,9 +48,10 @@ steps:
           Write-Host "Failed to send email. Error: $_"
       }
   env:
-    SMTP_USER: $(21071a05r8@vnrvjiet.in)
-    SMTP_PASSWORD: $(vnrvjiet)
-    SMTP_SERVER: $(smtp.office365.com)
+    SMTP_USER: $(SMTP_USER)
+    SMTP_PASSWORD: $(SMTP_PASSWORD)
+    SMTP_SERVER: $(SMTP_SERVER)
+
 - task: DotNetCoreCLI@2
   displayName: 'Build'
   inputs:
