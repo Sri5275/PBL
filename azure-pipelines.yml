@@ -14,19 +14,6 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Build'
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Publish'
-  inputs:
-    command: 'publish'
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 - task: PowerShell@2
   displayName: 'SendEmails'
   inputs:
@@ -62,6 +49,20 @@ steps:
     SMTP_USER: $(21071a05r8@vnrvjiet.in)
     SMTP_PASSWORD: $(vnrvjiet)
     SMTP_SERVER: $(smtp.office365.com)
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publish'
+  inputs:
+    command: 'publish'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
