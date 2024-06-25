@@ -1,5 +1,7 @@
+# azure-pipelines.yml
+
 trigger:
-- master
+- main
 
 pool:
   vmImage: 'windows-latest'
@@ -21,17 +23,13 @@ steps:
       # Set API endpoint with query parameters
       $apiEndpoint = "https://codeanalysis.azurewebsites.net/CodeAnalysis/PerfromStaticCodeAnalysis?owner=$owner&repo=$repo&token=$(GitHubPAT)"
 
-      try {
-          # Make HTTP request to perform static code analysis
-          $response = Invoke-RestMethod -Uri $apiEndpoint -Method Post
+      # Make HTTP request to perform static code analysis
+      $response = Invoke-RestMethod -Uri $apiEndpoint -Method Post
 
-          # Check response status
-          if ($response.StatusCode -eq 200) {
-              Write-Host "Static code analysis performed successfully"
-          } else {
-              Write-Host "Failed to perform static code analysis. Status code: $($response.StatusCode)"
-          }
-      } catch {
-          Write-Host "Error occurred: $_"
+      # Check response status
+      if ($response.StatusCode -eq 200) {
+          Write-Host "Static code analysis performed successfully"
+      } else {
+          Write-Host "Failed to perform static code analysis. Status code: $($response.StatusCode)"
           exit 1
       }
