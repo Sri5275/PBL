@@ -41,7 +41,7 @@ steps:
       if ($email) {
         Write-Host "Retrieved GitHub Email: $email"
       } else {
-        Write-Host "GitHub Email is not available."
+        Write-Host "GitHub Email is not available publicly."
       }
   env:
     GitHubPAT: $(GitHubPAT)
