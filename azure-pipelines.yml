@@ -17,7 +17,7 @@ steps:
     script: |
       # Define owner, repo, and token
       $owner = "Sri5275"
-      $repo = "PBL"
+      $repo = "Devops-CRUD"
       $token = "$(GitHubPAT)"
 
       # Define data to be sent
