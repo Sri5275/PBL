@@ -17,7 +17,6 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-     
       $token = "$(GitHubPAT)"
        # Retrieve necessary variables
       $githubApiUrl = "$(GITHUB_API_URL)"
@@ -54,7 +53,15 @@ steps:
 
       try {
           # Make HTTP POST request
-          Invoke-RestMethod -Uri $apiEndpoint -Method Post -Body $jsonBody -ContentType "application/json"
+          $response = Invoke-RestMethod -Uri $apiEndpoint -Method Post -Body $jsonBody -ContentType "application/json"
+          
+          # Check if response is false
+          if ($response -eq $false) {
+              Write-Host "Response from Target API is false. Stopping the pipeline."
+              exit 1
+          } else {
+              Write-Host "Response from Target API: $($response | ConvertTo-Json -Depth 3)"
+          }
       } catch {
           Write-Host "Error occurred: $_"
           exit 1
