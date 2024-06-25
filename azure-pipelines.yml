@@ -29,14 +29,13 @@ steps:
       # Make the GET request to the GitHub API to retrieve user information
       $githubResponse = Invoke-RestMethod -Uri $githubApiUrl -Method Get -Headers $githubHeaders
 
-      # Extract username from the GitHub response
+      # Extract username and repository name from the GitHub response
       $owner = $githubResponse.login
+      $repo = "$(Build.Repository.Name)"
 
       # Log the retrieved details
       Write-Host "Retrieved GitHub Username: $owner"
-
-      # Retrieve repository name from Azure DevOps predefined variable
-      $repo = "$(Build.Repository.Name)"
+      Write-Host "Repository Name: $repo"
 
       # Prepare the body for the POST request to the target API
       $postBody = @{
