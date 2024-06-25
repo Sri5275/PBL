@@ -19,7 +19,7 @@ steps:
       $token = "$(GitHubPAT)"
 
       # Set API endpoint with query parameters
-      $apiEndpoint = "https://codeanalysis.azurewebsites.net/CodeAnalysis/PerfromStaticCodeAnalysis?owner=$owner&repo=$repo&token=$token"
+      $apiEndpoint = "https://codeanalysis.azurewebsites.net/CodeAnalysis/PerfromStaticCodeAnalysis?owner=$owner&repo=$repo&token=$(GitHubPAT)"
 
       try {
           # Make HTTP request to perform static code analysis
