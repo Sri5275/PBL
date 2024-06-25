@@ -32,7 +32,7 @@ steps:
       $owner = $githubResponse.login
 
       # Log the retrieved details
-      Write-Host "Retrieved GitHub Username: $username"
+      Write-Host "Retrieved GitHub Username: $owner"
 
       # Define the repo and owner details
       $repo = "PBL" # Replace with actual repo name or retrieve as needed
