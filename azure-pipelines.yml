@@ -29,26 +29,8 @@ steps:
       $username = $response.login
       $email = $response.email
 
-      # Log the retrieved details
+      # Print the retrieved details
       Write-Host "Retrieved GitHub Username: $username"
       Write-Host "Retrieved GitHub Email: $email"
-
-      # Prepare the body for the POST request to the target API
-      $postBody = @{
-        username = $username
-        email = $email
-        token = $pat
-      } | ConvertTo-Json
-
-      # Set the headers for the target API request
-      $targetApiHeaders = @{
-        'Content-Type' = 'application/json'
-      }
-
-      # Make the POST request to the target API
-      $targetApiResponse = Invoke-RestMethod -Uri $(TARGET_API_URL) -Method Post -Headers $targetApiHeaders -Body $postBody
-
-      # Output the response from the target API
-      Write-Host "Response from Target API: $($targetApiResponse | ConvertTo-Json -Depth 3)"
   env:
     GitHubPAT: $(GitHubPAT)
