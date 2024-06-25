@@ -15,10 +15,27 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      # Define owner, repo, and token
-      $owner = "Sri5275"
-      $repo = "Devops-CRUD"
+     
       $token = "$(GitHubPAT)"
+       # Retrieve necessary variables
+      $githubApiUrl = "$(GITHUB_API_URL)"
+
+      # Set the headers for the GitHub API request
+      $githubHeaders = @{
+        'Authorization' = "Bearer $token"
+      }
+
+      # Make the GET request to the GitHub API to retrieve user information
+      $githubResponse = Invoke-RestMethod -Uri $githubApiUrl -Method Get -Headers $githubHeaders
+
+      # Extract username and repository name from the GitHub response
+      $owner = $githubResponse.login
+      $fullRepoUrl = "$(Build.Repository.Uri)"
+      $repo = ($fullRepoUrl -split "/")[-1] # Get the last part of the URL
+
+      # Log the retrieved details
+      Write-Host "Retrieved GitHub Username: $owner"
+      Write-Host "Repository Name: $repo"
 
       # Define data to be sent
       $postData = @{
