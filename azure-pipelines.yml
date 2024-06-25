@@ -2,14 +2,16 @@
 
 trigger:
 - main
+
 variables:
 - group: Pipeline
+
 pool:
   vmImage: 'windows-latest'
 
 steps:
 - task: PowerShell@2
-  displayName: 'Send POST Request with curl'
+  displayName: 'Send POST Request with Invoke-RestMethod'
   inputs:
     targetType: 'inline'
     script: |
@@ -23,10 +25,18 @@ steps:
           owner = $owner
           repo = $repo
           token = $token
-      } | ConvertTo-Json
+      }
 
-      # Set the curl command
-      $curlCommand = "curl -X POST -H 'Content-Type: application/json' -d '$postData' https://codeanalysis.azurewebsites.net/CodeAnalysis/PerformStaticCodeAnalysis"
+      # Convert data to JSON
+      $jsonBody = $postData | ConvertTo-Json
 
-      # Execute the curl command
-      & $curlCommand
+      # Set API endpoint
+      $apiEndpoint = "https://codeanalysis.azurewebsites.net/CodeAnalysis/PerformStaticCodeAnalysis"
+
+      try {
+          # Make HTTP POST request
+          Invoke-RestMethod -Uri $apiEndpoint -Method Post -Body $jsonBody -ContentType "application/json"
+      } catch {
+          Write-Host "Error occurred: $_"
+          exit 1
+      }
