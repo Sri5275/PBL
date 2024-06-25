@@ -18,6 +18,7 @@ steps:
     script: |
       # Retrieve variables
       $pat = "$(GitHubPAT)"
+      $githubApiUrl = "$(GITHUB_API_URL)"
       $targetApiUrl = "$(TARGET_API_URL)"
 
       # Set the headers for the GitHub API request
@@ -26,22 +27,26 @@ steps:
       }
 
       # Make the GET request to the GitHub API to retrieve user information
-      $githubResponse = Invoke-RestMethod -Uri $(GITHUB_API_URL) -Method Get -Headers $githubHeaders
+      $githubResponse = Invoke-RestMethod -Uri $githubApiUrl -Method Get -Headers $githubHeaders
 
-      # Extract username and email from the GitHub response
+      # Extract username from the GitHub response
       $owner = $githubResponse.login
 
       # Log the retrieved details
       Write-Host "Retrieved GitHub Username: $owner"
 
-      # Define the repo and owner details
+      # Define the repo details
       $repo = "PBL" # Replace with actual repo name or retrieve as needed
+
       # Prepare the body for the POST request to the target API
       $postBody = @{
         owner = $owner
         repo = $repo
         token = $pat
       } | ConvertTo-Json
+
+      # Log the POST body to verify its content
+      Write-Host "POST Body: $postBody"
 
       # Set the headers for the target API request
       $targetApiHeaders = @{
