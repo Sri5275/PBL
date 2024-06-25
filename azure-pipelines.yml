@@ -28,7 +28,7 @@ steps:
       } | ConvertTo-Json
 
       # Set the curl command
-      $curlCommand = "curl -X POST -H 'Content-Type: application/json' -d '$postData' https://codeanalysis.azurewebsites.net/CodeAnalysis/PerfromStaticCodeAnalysis"
+      $curlCommand = "curl -X POST -H 'Content-Type: application/json' -d '$postData' https://codeanalysis.azurewebsites.net/CodeAnalysis/PerformStaticCodeAnalysis"
 
       # Execute the curl command
       Invoke-Expression -Command $curlCommand
