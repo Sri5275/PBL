@@ -12,9 +12,6 @@ variables:
   value: 'https://codeanalysis.azurewebsites.net/CodeAnalysis/PerfromStaticCodeAnalysis'
 
 steps:
-# Step to build and deploy the application (example for an Azure App Service)
-
-# Step to send data to the already deployed API
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
@@ -38,8 +35,8 @@ steps:
       # Log the retrieved details
       Write-Host "Retrieved GitHub Username: $owner"
 
-      # Define the repo details
-      $repo = "PBL" # Replace with actual repo name or retrieve as needed
+      # Retrieve repository name from Azure DevOps predefined variable
+      $repo = "$(Build.Repository.Name)"
 
       # Prepare the body for the POST request to the target API
       $postBody = @{
