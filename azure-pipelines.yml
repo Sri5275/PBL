@@ -5,6 +5,8 @@ trigger:
 
 variables:
 - group: Pipeline
+- name: GITHUB_API_URL
+  value: 'https://api.github.com/user'
 
 pool:
   vmImage: 'windows-latest'
