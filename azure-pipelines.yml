@@ -1,7 +1,7 @@
 # azure-pipelines.yml
 
 trigger:
-- master
+- main
 variables:
 - group: Pipeline
 pool:
