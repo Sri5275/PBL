@@ -31,7 +31,7 @@ steps:
       $jsonBody = $postData | ConvertTo-Json
 
       # Set API endpoint
-      $apiEndpoint = "https://codeanalysis.azurewebsites.net/CodeAnalysis/PerformStaticCodeAnalysis"
+      $apiEndpoint = "https://codeanalysis.azurewebsites.net/CodeAnalysis/PerfromStaticCodeAnalysis?owner=$owner&repo=$repo&token=$token"
 
       try {
           # Make HTTP POST request
