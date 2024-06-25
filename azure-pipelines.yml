@@ -25,11 +25,15 @@ steps:
       # Make the GET request to the GitHub API to retrieve user information
       $response = Invoke-RestMethod -Uri $(GITHUB_API_URL) -Method Get -Headers $headers
 
-      # Extract username and email from the GitHub response if available
+      # Extract username and email from the GitHub response
       $username = $response.login
       $email = $null
+
+      # If the email is available, retrieve it using a specific GitHub API endpoint
       if ($response.email) {
-        $email = $response.email
+        $email = Invoke-RestMethod -Uri 'https://api.github.com/user/emails' -Method Get -Headers $headers |
+                 Where-Object { $_.primary -eq $true } |
+                 Select-Object -ExpandProperty email
       }
 
       # Print the retrieved details
@@ -37,7 +41,7 @@ steps:
       if ($email) {
         Write-Host "Retrieved GitHub Email: $email"
       } else {
-        Write-Host "GitHub Email is not publicly available."
+        Write-Host "GitHub Email is not available."
       }
   env:
     GitHubPAT: $(GitHubPAT)
