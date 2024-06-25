@@ -25,12 +25,19 @@ steps:
       # Make the GET request to the GitHub API to retrieve user information
       $response = Invoke-RestMethod -Uri $(GITHUB_API_URL) -Method Get -Headers $headers
 
-      # Extract username and email from the GitHub response
+      # Extract username and email from the GitHub response if available
       $username = $response.login
-      $email = $response.email
+      $email = $null
+      if ($response.email) {
+        $email = $response.email
+      }
 
       # Print the retrieved details
       Write-Host "Retrieved GitHub Username: $username"
-      Write-Host "Retrieved GitHub Email: $email"
+      if ($email) {
+        Write-Host "Retrieved GitHub Email: $email"
+      } else {
+        Write-Host "GitHub Email is not publicly available because your Github profile is private."
+      }
   env:
     GitHubPAT: $(GitHubPAT)
