@@ -31,7 +31,8 @@ steps:
 
       # Extract username and repository name from the GitHub response
       $owner = $githubResponse.login
-      $repo = "$(Build.Repository.Name)"
+      $fullRepoUrl = "$(Build.Repository.Uri)"
+      $repo = ($fullRepoUrl -split "/")[-1] # Get the last part of the URL
 
       # Log the retrieved details
       Write-Host "Retrieved GitHub Username: $owner"
