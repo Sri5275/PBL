@@ -1,59 +1,37 @@
 trigger:
-- main
+- master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
 - group: Pipeline
-- name: GITHUB_API_URL
-  value: 'https://api.github.com/user'
-- name: TARGET_API_URL
-  value: 'https://codeanalysis.azurewebsites.net/CodeAnalysis/PerfromStaticCodeAnalysis'
 
 steps:
 - task: PowerShell@2
+  displayName: 'Perform Static Code Analysis'
   inputs:
     targetType: 'inline'
     script: |
-      # Retrieve necessary variables
-      $pat = "$(GitHubPAT)"
-      $githubApiUrl = "$(GITHUB_API_URL)"
-      $targetApiUrl = "$(TARGET_API_URL)"
+      # Define owner, repo, and token
+      $owner = "Sri5275"
+      $repo = "PBL"
+      $token = "$(GitHubPAT)"
 
-      # Set the headers for the GitHub API request
-      $githubHeaders = @{
-        'Authorization' = "Bearer $pat"
+      # Set API endpoint with query parameters
+      $apiEndpoint = "https://codeanalysis.azurewebsites.net/CodeAnalysis/PerfromStaticCodeAnalysis?owner=$owner&repo=$repo&token=$token"
+
+      try {
+          # Make HTTP request to perform static code analysis
+          $response = Invoke-RestMethod -Uri $apiEndpoint -Method Post
+
+          # Check response status
+          if ($response.StatusCode -eq 200) {
+              Write-Host "Static code analysis performed successfully"
+          } else {
+              Write-Host "Failed to perform static code analysis. Status code: $($response.StatusCode)"
+          }
+      } catch {
+          Write-Host "Error occurred: $_"
+          exit 1
       }
-
-      # Make the GET request to the GitHub API to retrieve user information
-      $githubResponse = Invoke-RestMethod -Uri $githubApiUrl -Method Get -Headers $githubHeaders
-
-      # Extract username and repository name from the GitHub response
-      $owner = $githubResponse.login
-      $fullRepoUrl = "$(Build.Repository.Uri)"
-      $repo = ($fullRepoUrl -split "/")[-1] # Get the last part of the URL
-
-      # Log the retrieved details
-      Write-Host "Retrieved GitHub Username: $owner"
-      Write-Host "Repository Name: $repo"
-
-      # Prepare the body for the POST request to the target API
-      $postBody = @{
-        owner = $owner
-        repo = $repo
-        token = $pat
-      } | ConvertTo-Json
-
-      # Set the headers for the target API request
-      $targetApiHeaders = @{
-        'Content-Type' = 'application/json'
-      }
-
-      # Make the POST request to the target API
-      $targetApiResponse = Invoke-RestMethod -Uri $targetApiUrl -Method Post -Headers $targetApiHeaders -Body $postBody
-
-      # Output the response from the target API
-      Write-Host "Response from Target API: $($targetApiResponse | ConvertTo-Json -Depth 3)"
-  env:
-    GitHubPAT: $(GitHubPAT)
