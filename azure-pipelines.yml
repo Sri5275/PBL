@@ -6,12 +6,9 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-variables:
-- group: Pipeline
-
 steps:
 - task: PowerShell@2
-  displayName: 'Perform Static Code Analysis'
+  displayName: 'Send POST Request with curl'
   inputs:
     targetType: 'inline'
     script: |
@@ -20,16 +17,15 @@ steps:
       $repo = "PBL"
       $token = "$(GitHubPAT)"
 
-      # Set API endpoint with query parameters
-      $apiEndpoint = "https://codeanalysis.azurewebsites.net/CodeAnalysis/PerfromStaticCodeAnalysis?owner=$owner&repo=$repo&token=$(GitHubPAT)"
+      # Define data to be sent
+      $postData = @{
+          owner = $owner
+          repo = $repo
+          token = $token
+      } | ConvertTo-Json
 
-      # Make HTTP request to perform static code analysis
-      $response = Invoke-RestMethod -Uri $apiEndpoint -Method Post
+      # Set the curl command
+      $curlCommand = "curl -X POST -H 'Content-Type: application/json' -d '$postData' https://codeanalysis.azurewebsites.net/CodeAnalysis/PerfromStaticCodeAnalysis"
 
-      # Check response status
-      if ($response.StatusCode -eq 200) {
-          Write-Host "Static code analysis performed successfully"
-      } else {
-          Write-Host "Failed to perform static code analysis. Status code: $($response.StatusCode)"
-          exit 1
-      }
+      # Execute the curl command
+      Invoke-Expression -Command $curlCommand
